@@ -3,11 +3,8 @@ import { useRouter, useSegments } from "expo-router";
 import { onAuthStateChanged, User } from "firebase/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { auth } from "@/services/firebase";
-import {
-  AppRoute,
-  NEW_DEFAULT_ROUTES,
-  PUBLIC_ROUTES,
-} from "@/constants/routes";
+import { NEW_DEFAULT_ROUTES, PUBLIC_ROUTES } from "@/constants/routes";
+import { AppRoute } from "@/types/navigation";
 
 export function useAuthRedirect() {
   const router = useRouter();

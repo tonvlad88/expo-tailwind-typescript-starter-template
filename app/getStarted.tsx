@@ -1,8 +1,16 @@
-import { View, Text, TouchableOpacity, Dimensions, Image } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+  Image,
+  ActivityIndicator,
+} from "react-native";
 import { useRouter } from "expo-router";
 import { MotiView } from "moti";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useStaticContent } from "@/providers/static-content-context";
 
 const { height, width } = Dimensions.get("window");
 
@@ -10,6 +18,7 @@ export default function GetStarted() {
   const router = useRouter();
   const [startAnimation, setStartAnimation] = useState(false);
   const [hideAppName, setHideAppName] = useState(false);
+  const { contents, loading, error } = useStaticContent();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,6 +27,14 @@ export default function GetStarted() {
     }, 2000);
     return () => clearTimeout(timer);
   }, []);
+
+  if (loading) {
+    return (
+      <View className="flex-1 items-center justify-center bg-white">
+        <ActivityIndicator size="large" color="#000" />
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1 bg-primary">
@@ -34,10 +51,10 @@ export default function GetStarted() {
         >
           <View className="items-center">
             <Text className="text-white text-5xl font-extrabold tracking-wide text-center">
-              ECommerce
+              {contents?.getStarted?.appName1 ?? "App Name 1"}
             </Text>
             <Text className="text-white text-5xl font-extrabold tracking-wide text-center">
-              PLP App
+              {contents?.getStarted?.appName2 ?? "App Name 2"}
             </Text>
           </View>
         </MotiView>
@@ -62,10 +79,10 @@ export default function GetStarted() {
           />
 
           <Text className="text-textPrimary text-5xl font-bold text-center mb-4">
-            Reliable Products & Services
+            {contents?.getStarted?.appTagline ?? "App Tagline 1"}
           </Text>
           <Text className="text-textSecondary text-xl text-center mb-10">
-            Discover amazing products and services tailored just for you.
+            {contents?.getStarted?.appTagline2 ?? "App Tagline 2"}
           </Text>
 
           <TouchableOpacity
@@ -75,7 +92,9 @@ export default function GetStarted() {
               router.push("/login");
             }}
           >
-            <Text className="text-white text-lg font-bold">Get Started</Text>
+            <Text className="text-white text-lg font-bold">
+              {contents?.getStarted?.buttonTitle ?? "Get Started"}
+            </Text>
           </TouchableOpacity>
         </MotiView>
       )}

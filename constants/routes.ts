@@ -1,3 +1,5 @@
+import { AppRoute } from "@/types/navigation";
+
 export const DEFAULT_ROUTES = {
   login: "/login" as const, // app/(auth)/login.tsx
   resetPassword: "/reset-password" as const, // app/(auth)/reset-password.tsx
@@ -5,8 +7,6 @@ export const DEFAULT_ROUTES = {
   getStarted: "/getStarted" as const, // app/(public)/getStarted.tsx
   home: "/home" as const, // app/(main)/home/index.tsx
 } as const;
-
-export type AppRoute = (typeof DEFAULT_ROUTES)[keyof typeof DEFAULT_ROUTES];
 
 export const NEW_DEFAULT_ROUTES = {
   getStarted: "/getStarted" as AppRoute,

@@ -1,4 +1,5 @@
 // types/navigation.ts
+import { DEFAULT_ROUTES } from "@/constants/routes";
 import { Ionicons } from "@expo/vector-icons";
 
 export type AnimatedTabIconProps = {
@@ -9,3 +10,5 @@ export type AnimatedTabIconProps = {
   inactiveColor: string;
   size: number;
 };
+
+export type AppRoute = (typeof DEFAULT_ROUTES)[keyof typeof DEFAULT_ROUTES];
