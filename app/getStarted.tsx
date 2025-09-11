@@ -1,16 +1,11 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Dimensions,
-  Image,
-  ActivityIndicator,
-} from "react-native";
+import { View, Text, TouchableOpacity, Dimensions, Image } from "react-native";
 import { useRouter } from "expo-router";
 import { MotiView } from "moti";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useStaticContent } from "@/providers/static-content-context";
+import { LoadingState } from "@/components/StateComponents/LoadingState";
+import { ErrorState } from "@/components/StateComponents/ErrorState";
 
 const { height, width } = Dimensions.get("window");
 
@@ -18,7 +13,7 @@ export default function GetStarted() {
   const router = useRouter();
   const [startAnimation, setStartAnimation] = useState(false);
   const [hideAppName, setHideAppName] = useState(false);
-  const { contents, loading, error } = useStaticContent();
+  const { contents, loading, error, refetch } = useStaticContent();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -28,13 +23,8 @@ export default function GetStarted() {
     return () => clearTimeout(timer);
   }, []);
 
-  if (loading) {
-    return (
-      <View className="flex-1 items-center justify-center bg-white">
-        <ActivityIndicator size="large" color="#000" />
-      </View>
-    );
-  }
+  if (loading) return <LoadingState />;
+  if (error) return <ErrorState onRetry={refetch} />;
 
   return (
     <View className="flex-1 bg-primary">

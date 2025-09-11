@@ -1,5 +1,5 @@
 // components/ThemedGradientButton.tsx
-import { Pressable, PressableProps, Text } from "react-native";
+import { Pressable, PressableProps, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useTheme } from "@/providers/theme-context";
 
@@ -23,17 +23,21 @@ export function ThemedGradientButton({
   return (
     <Pressable
       onPress={onPress}
-      className={`rounded-lg overflow-hidden ${className}`}
+      className={`rounded-lg ${className}`}
       disabled={disabled}
     >
-      <LinearGradient
-        colors={[fromColor, toColor]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-        className="px-6 py-3 items-center justify-center"
-      >
-        <Text className="text-white font-semibold text-base">{title}</Text>
-      </LinearGradient>
+      <View className="rounded-lg overflow-hidden">
+        <LinearGradient
+          colors={[fromColor, toColor]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          className="items-center justify-center overflow-hidden"
+        >
+          <Text className="px-6 py-3 text-white font-semibold text-base text-center">
+            {title}
+          </Text>
+        </LinearGradient>
+      </View>
     </Pressable>
   );
 }
