@@ -1,7 +1,12 @@
 import { View, Text, TouchableOpacity, Dimensions, Image } from "react-native";
 import { useRouter } from "expo-router";
-import { MotiView } from "moti";
 import { useEffect, useState } from "react";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  withDelay,
+} from "react-native-reanimated";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useStaticContent } from "@/providers/static-content-context";
 import { LoadingState } from "@/components/StateComponents/LoadingState";
@@ -15,13 +20,38 @@ export default function GetStarted() {
   const [hideAppName, setHideAppName] = useState(false);
   const { contents, loading, error, refetch } = useStaticContent();
 
+  // Reanimated shared values
+  const appNameY = useSharedValue(height / 2 - 60);
+  const appNameOpacity = useSharedValue(1);
+  const contentOpacity = useSharedValue(0);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setStartAnimation(true);
-      setTimeout(() => setHideAppName(true), 1000); // wait for animation to finish
+
+      // Animate app name up and fade out
+      appNameY.value = withTiming(60, { duration: 1000 });
+      appNameOpacity.value = withTiming(0, { duration: 1000 });
+
+      // Show content after app name animation
+      contentOpacity.value = withDelay(1000, withTiming(1, { duration: 800 }));
+
+      // Hide app name after animation completes
+      setTimeout(() => setHideAppName(true), 1000);
     }, 2000);
+
     return () => clearTimeout(timer);
   }, []);
+
+  // Animated styles
+  const appNameStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: appNameY.value }],
+    opacity: appNameOpacity.value,
+  }));
+
+  const contentStyle = useAnimatedStyle(() => ({
+    opacity: contentOpacity.value,
+  }));
 
   if (loading) return <LoadingState />;
   if (error) return <ErrorState onRetry={refetch} />;
@@ -30,13 +60,8 @@ export default function GetStarted() {
     <View className="flex-1 bg-primary">
       {/* Animated App Name */}
       {!hideAppName && (
-        <MotiView
-          from={{ translateY: height / 2 - 60, opacity: 1 }}
-          animate={{
-            translateY: startAnimation ? 60 : height / 2 - 60,
-            opacity: startAnimation ? 0 : 1,
-          }}
-          transition={{ type: "timing", duration: 1000 }}
+        <Animated.View
+          style={appNameStyle}
           className="absolute top-0 left-0 right-0 items-center"
         >
           <View className="items-center">
@@ -47,22 +72,20 @@ export default function GetStarted() {
               {contents?.getStarted?.appName2 ?? "App Name 2"}
             </Text>
           </View>
-        </MotiView>
+        </Animated.View>
       )}
 
       {/* Centered Content */}
       {startAnimation && (
-        <MotiView
-          from={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ type: "timing", duration: 800 }}
+        <Animated.View
+          style={contentStyle}
           className="flex-1 items-center justify-center bg-background px-6"
         >
           <Image
             source={require("../assets/images/app-logo-wo-bg.png")}
             style={{
-              width: width * 0.5, // 50% of screen width
-              height: width * 0.5, // keep it square
+              width: width * 0.5,
+              height: width * 0.5,
               resizeMode: "contain",
             }}
             className="mb-10"
@@ -86,7 +109,7 @@ export default function GetStarted() {
               {contents?.getStarted?.buttonTitle ?? "Get Started"}
             </Text>
           </TouchableOpacity>
-        </MotiView>
+        </Animated.View>
       )}
     </View>
   );
