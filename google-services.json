@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "978625712587",
+    "project_id": "casa-mira-south",
+    "storage_bucket": "casa-mira-south.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978625712587:android:b1bdce731787f41bac664e",
+        "android_client_info": {
+          "package_name": "com.tonyph.cms"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD32ts2gjf3Ch1JRNZ7r1WuVldNIfasSwM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
