@@ -1,0 +1,100 @@
+{
+  "themes": {
+    "default": {
+      "colors": {
+        "primary": "255,99,71",
+        "primaryLight": "255,160,122",
+        "primaryDark": "139,0,0",
+        "secondary": "30,144,255",
+        "secondaryLight": "135,206,250",
+        "secondaryDark": "0,0,139",
+        "accent": "255,215,0",
+        "background": "245,245,245",
+        "surface": "255,255,255",
+        "textPrimary": "33,33,33",
+        "textSecondary": "117,117,117",
+        "error": "211,47,47",
+        "success": "56,142,60",
+        "warning": "255,143,0"
+      },
+      "gradients": {
+        "brand": {
+          "from": "255,99,71",
+          "to": "30,144,255"
+        }
+      }
+    },
+    "clientA": {
+      "colors": {
+        "primary": "76,175,80",
+        "primaryLight": "129,199,132",
+        "primaryDark": "27,94,32",
+        "secondary": "255,193,7",
+        "secondaryLight": "255,224,130",
+        "secondaryDark": "255,143,0",
+        "accent": "156,39,176",
+        "background": "250,250,250",
+        "surface": "255,255,255",
+        "textPrimary": "33,33,33",
+        "textSecondary": "97,97,97",
+        "error": "244,67,54",
+        "success": "67,160,71",
+        "warning": "255,152,0"
+      },
+      "gradients": {
+        "brand": {
+          "from": "76,175,80",
+          "to": "255,193,7"
+        }
+      }
+    },
+    "web": {
+      "colors": {
+        "primary": "79,70,229",
+        "primaryLight": "129,140,248",
+        "primaryDark": "55,48,163",
+        "secondary": "147,51,234",
+        "secondaryLight": "192,132,252",
+        "secondaryDark": "126,34,206",
+        "accent": "6,182,212",
+        "background": "249,250,251",
+        "surface": "255,255,255",
+        "textPrimary": "17,24,39",
+        "textSecondary": "75,85,99",
+        "error": "220,38,38",
+        "success": "22,163,74",
+        "warning": "217,119,6"
+      },
+      "gradients": {
+        "brand": {
+          "from": "99,102,241",
+          "to": "147,51,234"
+        }
+      }
+    },
+    "cms": {
+      "colors": {
+        "primary": "#388E3C",
+        "primaryLight": "#66BB6A",
+        "primaryDark": "#1B5E20",
+        "secondary": "#1976D2",
+        "secondaryLight": "#64B5F6",
+        "secondaryDark": "#0D47A1",
+        "accent": "#FBC02D",
+        "background": "#F5F5F5",
+        "surface": "#FFFFFF",
+        "textPrimary": "#212121",
+        "textSecondary": "#757575",
+        "error": "#D32F2F",
+        "success": "#388E3C",
+        "warning": "#FFA000"
+      },
+      "gradients": {
+        "brand": {
+          "from": "#388E3C",
+          "to": "#1976D2"
+        }
+      }
+    }
+  }
+}
